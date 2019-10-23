@@ -1,9 +1,11 @@
 import http.client
 import json
 
-def send(token, id, text):
+def send(id, token, text):
     connection = http.client.HTTPSConnection("api.telegram.org")
     headers = {'Content-type': 'application/json'}
     data = {'chat_id': id, 'text': text}
-    connection.request('POST', "/bot" +token + "/sendmessage", json.dumps(data), headers)
-
+    path = "/bot" +token + "/sendMessage"
+    connection.request('POST', path, json.dumps(data), headers)
+    #response = connection.getresponse()
+    #print(response.read().decode())

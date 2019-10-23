@@ -6,7 +6,5 @@ setup(name='telogram',
       url='https://github.com/jserrats/telogram',
       author='jserrats',
       license='MIT',
-      packages=find_packages(),
-      install_requires=[
-          'python-telegram-bot'
-      ])
+      packages=find_packages()
+      )

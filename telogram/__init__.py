@@ -5,16 +5,16 @@ import __main__
 from telogram.telegramapi import send
 
 class TelegramLogHandler(logging.Handler):
-    def __init__(self, telegram_id, token):
+    def __init__(self, id, token):
         self.token = token
-        self.telegram_id = telegram_id
+        self.id = id
         logging.Handler.__init__(self)
         self.setLevel(logging.WARNING)
         self.setFormatter(CustomFormatter())
 
     def emit(self, message):
         msg = self.format(message)
-        send(self.token, self.telegram_id, msg)
+        send(self.id, self.token, msg)
 
 class CustomFormatter(logging.Formatter):
     def format(self, record):
@@ -39,11 +39,11 @@ def log_unhandled(type, value, tb):
     traceback.print_tb(tb)
 
 
-def init(telegram_id, token):
+def init(id, token):
     master_logger = logging.getLogger()
 
     master_logger.setLevel(logging.DEBUG)
-    master_logger.addHandler(TelegramLogHandler(telegram_id, token))
+    master_logger.addHandler(TelegramLogHandler(id, token))
     sys.excepthook = log_unhandled
 
     return master_logger
